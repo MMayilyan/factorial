@@ -1,16 +1,27 @@
 #include <iostream>
+#include <exception>
 
-unsigned factorial(unsigned n) {
+int factorial(int n) {
   if (n == 0) {
     return 1;
   }
+
+  if (n < 0) {
+    throw std::runtime_error("n can not be negative.");
+  }
+
   return n * factorial(n - 1);
 }
 
 int main() {
-  unsigned n;
+  int n;
   std::cin >> n;
-
-  unsigned fact = factorial(n);
-  std::cout << fact;
+  
+  try {
+    int fact = factorial(n);
+    std::cout << fact;
+  } catch (std::exception& ex) {
+    std::cout << ex.what() << "\n";
+  }
+  return 0;
 }
